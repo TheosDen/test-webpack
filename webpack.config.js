@@ -5,12 +5,11 @@ module.exports = {
     context: __dirname + '/frontend',
 
     entry: {
-        common: './common',
-        home: './home',
-        about: './about'
+        app: './app'
     },
     output: {
-        path: __dirname + "/public",
+        path: __dirname + "/public/js",
+        publicPath: '/js/',
         filename: "[name].js",
         library: '[name]'
     },
@@ -22,7 +21,6 @@ module.exports = {
     },
 
     devtool: "eval",
-    // devtool: "source-map",
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
