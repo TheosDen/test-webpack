@@ -1,11 +1,18 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const webpack = require('webpack');
 
 module.exports = {
-    entry: "./home",
+    context: __dirname + '/frontend',
+
+    entry: {
+        common: './common',
+        home: './home',
+        about: './about'
+    },
     output: {
-        // path: __dirname + "/dist",
-        filename: "bundle.js",
-        library: 'home'
+        path: __dirname + "/public",
+        filename: "[name].js",
+        library: '[name]'
     },
 
     watch: NODE_ENV == 'development',
@@ -14,7 +21,14 @@ module.exports = {
         aggregateTimeout: 200
     },
 
-    devtool: "source-map",
+    devtool: "eval",
+    // devtool: "source-map",
+
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common'
+        })
+    ],
 
     module: {
         loaders: [
